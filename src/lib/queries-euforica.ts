@@ -97,12 +97,12 @@ export async function getLeadById(id: string): Promise<Lead | null> {
 export async function createLead(leadData: CreateLeadData): Promise<Lead> {
   const { data, error } = await supabase
     .from('leads')
-    .insert(leadData)
+    .insert([leadData])
     .select()
     .single()
 
   if (error) throw error
-  return data
+  return data as Lead
 }
 
 /**
