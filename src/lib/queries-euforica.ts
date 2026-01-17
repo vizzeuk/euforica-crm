@@ -1,8 +1,5 @@
 import { supabase } from '@/lib/supabase/client'
 import type { Lead, LeadWithAlert, PipelineStats, LeadsByStatus, CreateLeadData, UpdateLeadData, LeadStatus } from '@/types/euforica'
-import type { Database } from '@/lib/supabase/database.types'
-
-type LeadInsert = Database['public']['Tables']['leads']['Insert']
 
 // =====================================================
 // QUERIES DE LEADS
@@ -100,7 +97,7 @@ export async function getLeadById(id: string): Promise<Lead | null> {
 export async function createLead(leadData: CreateLeadData): Promise<Lead> {
   const { data, error } = await supabase
     .from('leads')
-    .insert([leadData as LeadInsert])
+    .insert([leadData as any])
     .select()
     .single()
 
