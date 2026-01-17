@@ -68,7 +68,7 @@ export async function getAllLeadsByStatus(): Promise<Record<string, Lead[]>> {
     lost: [],
   }
 
-  data?.forEach((lead) => {
+  data?.forEach((lead: Lead) => {
     if (grouped[lead.status]) {
       grouped[lead.status].push(lead)
     }
