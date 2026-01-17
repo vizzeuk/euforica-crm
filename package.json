@@ -1,7 +1,7 @@
 {
-  "name": "bordados-crm",
+  "name": "euforica-crm",
   "version": "1.0.0",
-  "description": "Sistema de Gestión de Producción y CRM para Servicio de Bordados",
+  "description": "Sistema CRM con autenticación para gestión de leads y eventos - EUFORICA",
   "private": true,
   "scripts": {
     "dev": "next dev",
