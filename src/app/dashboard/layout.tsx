@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { Home, Users, BarChart3, Settings, Bell, Zap, LogOut } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createBrowserClient } from '@supabase/ssr'
 import { useState } from 'react'
+import { Toaster } from 'react-hot-toast'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
@@ -21,7 +22,10 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname()
   const router = useRouter()
-  const supabase = createClientComponentClient()
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
   const [loggingOut, setLoggingOut] = useState(false)
 
   const handleLogout = async () => {
@@ -33,6 +37,24 @@ export default function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: '#fff',
+            color: '#000',
+            border: '1px solid #e5e5e5',
+            fontFamily: 'Inter, sans-serif',
+          },
+          success: {
+            iconTheme: {
+              primary: '#000',
+              secondary: '#fff',
+            },
+          },
+        }}
+      />
       {/* Header minimalista */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-white/90 dark:bg-neutral-900/90 border-b border-neutral-200 dark:border-neutral-800">
         <div className="px-6 lg:px-12">

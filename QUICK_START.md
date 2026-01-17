@@ -5,6 +5,7 @@
 ### 🔐 PASO 1: Configurar Autenticación (5 minutos)
 
 #### 1.1 Ejecutar SQL en Supabase
+
 ```
 1. Abre: https://supabase.com/dashboard
 2. Tu proyecto → SQL Editor
@@ -14,6 +15,7 @@
 ```
 
 #### 1.2 Crear Usuarios del Equipo
+
 ```
 1. Authentication → Users → Add User
 2. Email: juan@euforica.com
@@ -29,6 +31,7 @@
 ### 📦 PASO 2: Subir a GitHub (2 minutos)
 
 #### 2.1 Crear Repositorio en GitHub
+
 ```
 1. Ve a: https://github.com/new
 2. Nombre: euforica-crm
@@ -37,6 +40,7 @@
 ```
 
 #### 2.2 Conectar Código (Ya hicimos git init)
+
 ```powershell
 # Copia EXACTAMENTE estos comandos (reemplaza TU_USUARIO)
 git remote add origin https://github.com/TU_USUARIO/euforica-crm.git
@@ -51,6 +55,7 @@ git push -u origin main
 ### 🌐 PASO 3: Deploy en Vercel (5 minutos)
 
 #### 3.1 Importar desde GitHub
+
 ```
 1. Abre: https://vercel.com/new
 2. Import Git Repository
@@ -68,11 +73,13 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_anon_key_aqui
 ```
 
 **¿Dónde las consigo?**
+
 1. Supabase → Settings ⚙️ → API
 2. Copia "Project URL" → pega en NEXT_PUBLIC_SUPABASE_URL
 3. Copia "anon public" → pega en NEXT_PUBLIC_SUPABASE_ANON_KEY
 
 #### 3.3 Deploy
+
 ```
 1. Verifica que las variables estén agregadas
 2. Click Deploy
@@ -87,12 +94,15 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_anon_key_aqui
 ## 🔑 PASO 4: Acceder al Sistema
 
 ### Para TI:
+
 1. Abre tu URL de Vercel
 2. Login con las credenciales que creaste
 3. ¡Bienvenido al dashboard! 🎉
 
 ### Para TU EQUIPO:
+
 Comparte:
+
 - ✅ URL: `https://tu-app.vercel.app`
 - ✅ Email y contraseña individual de cada usuario
 
@@ -138,12 +148,15 @@ git push
 ## 🆘 ¿Problemas?
 
 ### "Build failed en Vercel"
+
 → Verifica que AMBAS variables de entorno estén configuradas
 
 ### "Invalid credentials al hacer login"
+
 → Usuario debe estar en Supabase > Authentication > Users
 
 ### "Cannot access after deployment"
+
 → Supabase > Settings > API > Allow Client-side Auth debe estar ON
 
 ---

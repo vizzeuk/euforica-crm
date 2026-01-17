@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import toast from 'react-hot-toast'
 import { 
   Select,
   SelectContent,
@@ -54,11 +55,11 @@ export default function AjustesPage() {
         attendees: 0,
       })
       
-      alert('Lead creado exitosamente!')
+      toast.success('Lead creado exitosamente')
       setIsAddingLead(false)
     },
     onError: (error) => {
-      alert('Error al crear lead: ' + error)
+      toast.error('Error al crear lead: ' + error.message)
     },
   })
 
@@ -66,7 +67,7 @@ export default function AjustesPage() {
     e.preventDefault()
     
     if (!formData.nombre || !formData.email) {
-      alert('Nombre y email son obligatorios')
+      toast.error('Nombre y email son obligatorios')
       return
     }
 

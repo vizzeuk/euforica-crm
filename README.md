@@ -1,28 +1,44 @@
 # 🎉 EUFORICA - Command Center
 
-> CRM personalizado para gestión de leads y eventos | Agencia de planificación de eventos
+> Sistema CRM con autenticación segura para gestión de leads y eventos
 
 ## 🚀 Descripción
 
-**EUFORICA Command Center** es un sistema CRM diseñado específicamente para agencias de eventos. Transforma leads desde landing pages en oportunidades de negocio gestionables con un pipeline visual y alertas inteligentes.
+**EUFORICA Command Center** es un CRM diseñado específicamente para agencias de eventos. Sistema completo con autenticación, pipeline visual, y dashboard en tiempo real.
 
 ### ✨ Características Principales
 
-- **Pipeline Visual (Kanban)**: Arrastra y suelta leads entre estados (Nuevo → Contactado → Propuesta → Ganado/Perdido)
+- 🔐 **Autenticación Segura**: Sistema de login con Supabase Auth
+- **Pipeline Visual (Kanban)**: Arrastra y suelta leads entre estados
 - **Dashboard en Tiempo Real**: KPIs financieros, tasas de conversión, alertas urgentes
-- **Sistema de Alertas**: Notificaciones automáticas para leads inactivos (+5 días sin contacto)
+- **Sistema de Alertas**: Notificaciones automáticas para leads inactivos
 - **Tracking Financiero**: Pipeline value, revenue ganado, valor promedio por deal
-- **Dark Mode Premium**: Tema zinc-950 con acentos vibrantes y glassmorphism
+- **Diseño Minimalista**: Estética B&W con tipografía Playfair Display + Inter
 - **Gestión de Eventos**: Detalles específicos (tipo de evento, asistentes, fecha)
 
 ## 🛠️ Tech Stack
 
 - **Frontend**: Next.js 14 (App Router) + TypeScript
+- **Autenticación**: Supabase Auth con middleware de protección
 - **Styling**: Tailwind CSS + Shadcn/ui
-- **Database**: Supabase PostgreSQL
+- **Database**: Supabase PostgreSQL con Row Level Security
 - **Data Fetching**: TanStack Query (React Query)
-- **Charts**: Recharts
-- **Internationalization**: date-fns (español)
+- **Hosting**: Vercel
+- **Fuentes**: Playfair Display + Inter
+
+## 🔐 Seguridad
+
+- ✅ Row Level Security (RLS) en Supabase
+- ✅ Middleware de protección de rutas
+- ✅ Solo usuarios autenticados pueden acceder
+- ✅ Variables de entorno seguras
+- ✅ Sesión persistente
+
+## 📖 Documentación
+
+- 📘 [**DEPLOYMENT_GUIDE.md**](./DEPLOYMENT_GUIDE.md) - Guía completa de despliegue en Vercel
+- 📄 [**SETUP_SUPABASE.md**](./SETUP_SUPABASE.md) - Configuración de Supabase
+- 🎨 [**DESIGN_SYSTEM.md**](./DESIGN_SYSTEM.md) - Sistema de diseño
 
 ## 📊 Estructura de la Base de Datos
 

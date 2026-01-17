@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
+import toast from 'react-hot-toast'
 import { 
   Search, 
   Mail, 
@@ -49,6 +50,10 @@ export default function LeadsPage() {
     mutationFn: deleteLead,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['all-leads'] })
+      toast.success('Lead eliminado correctamente')
+    },
+    onError: () => {
+      toast.error('Error al eliminar el lead')
     },
   })
 
@@ -58,10 +63,36 @@ export default function LeadsPage() {
     lead.telefono?.includes(searchTerm)
   )
 
-  const handleDelete = (id: string) => {
-    if (confirm('¿Estás seguro de eliminar este lead?')) {
-      deleteMutation.mutate(id)
-    }
+  const handleDelete = (id: string, nombre: string) => {
+    toast((t) => (
+      <div className="flex flex-col gap-3">
+        <p className="font-semibold text-black">¿Eliminar lead?</p>
+        <p className="text-sm text-neutral-700">¿Estás seguro de eliminar a <strong>{nombre}</strong>?</p>
+        <div className="flex gap-2 justify-end">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => toast.dismiss(t.id)}
+            className="text-neutral-700 hover:bg-neutral-100"
+          >
+            Cancelar
+          </Button>
+          <Button
+            size="sm"
+            onClick={() => {
+              toast.dismiss(t.id)
+              deleteMutation.mutate(id)
+            }}
+            className="bg-black text-white hover:bg-neutral-800"
+          >
+            Eliminar
+          </Button>
+        </div>
+      </div>
+    ), {
+      duration: 10000,
+      style: { minWidth: '300px' }
+    })
   }
 
   if (isLoading) {
@@ -180,7 +211,7 @@ export default function LeadsPage() {
                       variant="ghost"
                       size="icon"
                       className="text-neutral-500 hover:text-black hover:bg-neutral-100"
-                      onClick={() => handleDelete(lead.id)}
+                      onClick={() => handleDelete(lead.id, lead.nombre)}
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
