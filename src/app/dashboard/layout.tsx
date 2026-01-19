@@ -7,6 +7,9 @@ import { cn } from '@/lib/utils'
 import { createBrowserClient } from '@supabase/ssr'
 import { useState } from 'react'
 import { Toaster } from 'react-hot-toast'
+import { useQuery } from '@tanstack/react-query'
+import { getNotificacionesStats } from '@/lib/queries-notificaciones'
+import NotificacionesPanel from '@/components/NotificacionesPanel'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
@@ -27,6 +30,14 @@ export default function DashboardLayout({
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
   const [loggingOut, setLoggingOut] = useState(false)
+  const [notificacionesOpen, setNotificacionesOpen] = useState(false)
+
+  // Query para stats de notificaciones
+  const { data: stats } = useQuery({
+    queryKey: ['notificaciones-stats'],
+    queryFn: getNotificacionesStats,
+    refetchInterval: 30000, // Refrescar cada 30 segundos
+  })
 
   const handleLogout = async () => {
     setLoggingOut(true)
@@ -67,9 +78,16 @@ export default function DashboardLayout({
             </div>
             <div className="flex items-center gap-6">
               <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Admin</span>
-              <button className="relative p-2 text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors duration-300">
+              <button 
+                onClick={() => setNotificacionesOpen(!notificacionesOpen)}
+                className="relative p-2 text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors duration-300"
+              >
                 <Bell className="h-5 w-5" />
-                <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 bg-black dark:bg-white rounded-full"></span>
+                {stats && stats.no_leidas > 0 && (
+                  <span className="absolute top-1 right-1 h-4 w-4 bg-black dark:bg-white text-white dark:text-black rounded-full text-xs flex items-center justify-center font-bold">
+                    {stats.no_leidas > 9 ? '9+' : stats.no_leidas}
+                  </span>
+                )}
               </button>
               <button 
                 onClick={handleLogout}
@@ -117,6 +135,12 @@ export default function DashboardLayout({
           {children}
         </main>
       </div>
+
+      {/* Panel de Notificaciones */}
+      <NotificacionesPanel 
+        isOpen={notificacionesOpen}
+        onClose={() => setNotificacionesOpen(false)}
+      />
     </div>
   )
 }
