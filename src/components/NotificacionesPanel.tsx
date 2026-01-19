@@ -8,6 +8,7 @@ import {
   marcarTodasLeidas,
   eliminarNotificacion 
 } from '@/lib/queries-notificaciones'
+import type { Notificacion } from '@/types/notificaciones'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { X, Check, AlertCircle, CheckCircle, Info, AlertTriangle } from 'lucide-react'
@@ -44,12 +45,18 @@ const BG_MAP = {
 export default function NotificacionesPanel({ isOpen, onClose }: NotificacionesPanelProps) {
   const queryClient = useQueryClient()
 
-  const { data: notificaciones = [], isLoading } = useQuery({
+  const { data: notificaciones = [], isLoading, error } = useQuery<Notificacion[], Error>({
     queryKey: ['notificaciones-no-leidas'],
     queryFn: getNotificacionesNoLeidas,
     refetchInterval: 30000, // Refrescar cada 30 segundos
     enabled: isOpen,
   })
+
+  // Mostrar error si existe
+  if (error) {
+    console.error('❌ Error al cargar notificaciones:', error)
+    toast.error(`Error: ${error.message || 'No se pudieron cargar las notificaciones'}`)
+  }
 
   const marcarLeidaMutation = useMutation({
     mutationFn: marcarNotificacionLeida,
@@ -139,7 +146,7 @@ export default function NotificacionesPanel({ isOpen, onClose }: NotificacionesP
               </div>
             )}
 
-            {notificaciones.map((notif) => {
+            {notificaciones.map((notif: Notificacion) => {
               const Icon = ICON_MAP[notif.tipo]
               const colorClass = COLOR_MAP[notif.tipo]
               const bgClass = BG_MAP[notif.tipo]
