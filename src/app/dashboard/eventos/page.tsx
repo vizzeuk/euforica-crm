@@ -404,7 +404,7 @@ export default function EventosPage() {
             <Calendar className="h-16 w-16 text-neutral-300 mb-4" />
             <h3 className="text-xl font-semibold mb-2">No hay eventos confirmados</h3>
             <p className="text-neutral-600 text-center max-w-md">
-              Los leads con status "Ganado" aparecerán aquí automáticamente. 
+              Los leads con status &quot;Ganado&quot; aparecerán aquí automáticamente. 
               Podrás asignarles fecha de evento y ganancia total.
             </p>
           </CardContent>
