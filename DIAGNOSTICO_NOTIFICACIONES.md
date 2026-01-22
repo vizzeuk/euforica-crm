@@ -1,6 +1,7 @@
 # 🔍 Diagnóstico: Notificaciones no aparecen en el CRM
 
 ## ❌ Problema
+
 Las notificaciones se marcan en Supabase pero no se reflejan en el CRM.
 
 ## ✅ Pasos para solucionarlo
@@ -8,11 +9,13 @@ Las notificaciones se marcan en Supabase pero no se reflejan en el CRM.
 ### 1. VERIFICAR POLÍTICAS RLS EN SUPABASE
 
 Ve a tu proyecto de Supabase → **SQL Editor** y ejecuta el contenido del archivo:
+
 ```
 supabase/notificaciones-setup.sql
 ```
 
 Este archivo hace lo siguiente:
+
 - ✅ Habilita RLS en la tabla `notificaciones`
 - ✅ Elimina políticas antiguas que puedan estar bloqueando
 - ✅ Crea políticas nuevas más permisivas para usuarios autenticados
@@ -32,6 +35,7 @@ Este archivo hace lo siguiente:
 5. Busca errores en rojo
 
 **Errores comunes:**
+
 ```
 ❌ 401 Unauthorized → El token de autenticación no se está enviando
 ❌ 403 Forbidden → Las políticas RLS están bloqueando
@@ -45,12 +49,14 @@ Este archivo hace lo siguiente:
 Ve a tu proyecto en Vercel → **Settings** → **Environment Variables**
 
 Verifica que estén configuradas:
+
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://tu-proyecto.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-clave-anon
 ```
 
 Si las modificaste, debes:
+
 1. Ir a **Deployments**
 2. Hacer clic en los 3 puntos del último deployment
 3. Seleccionar **Redeploy**
@@ -62,12 +68,14 @@ Si las modificaste, debes:
 Ve a Supabase → **Table Editor** → **notificaciones**
 
 Deberías ver notificaciones con:
+
 - ✅ `leido = false`
 - ✅ `mensaje` con texto
 - ✅ `tipo` = 'info', 'success', 'warning' o 'error'
 - ✅ `created_at` reciente
 
 Si la tabla está vacía, inserta una manualmente:
+
 ```sql
 INSERT INTO notificaciones (mensaje, tipo, lead_nombre, leido) VALUES
   ('Prueba desde Supabase', 'info', NULL, false);
@@ -99,6 +107,7 @@ SELECT tablename, rowsecurity FROM pg_tables WHERE tablename = 'notificaciones';
 ```
 
 **Resultado esperado:**
+
 - `rowsecurity = true` (RLS habilitado)
 - Al menos 4 políticas activas (SELECT, INSERT, UPDATE, DELETE)
 - Al menos 1 notificación con `leido = false`

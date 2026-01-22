@@ -16,7 +16,8 @@ import {
   DollarSign,
   AlertTriangle,
   Trash2,
-  Edit
+  Edit,
+  MessageSquare
 } from 'lucide-react'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
@@ -157,10 +158,15 @@ export default function LeadsPage() {
                         <span>{lead.email}</span>
                       </div>
                       {lead.telefono && (
-                        <div className="flex items-center gap-2">
-                          <Phone className="h-4 w-4 text-neutral-500" />
+                        <a 
+                          href={`https://wa.me/${lead.telefono.replace(/\D/g, '')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-neutral-700 hover:text-green-600 transition-colors cursor-pointer"
+                        >
+                          <MessageSquare className="h-4 w-4" />
                           <span>{lead.telefono}</span>
-                        </div>
+                        </a>
                       )}
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4 text-neutral-500" />

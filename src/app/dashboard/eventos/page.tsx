@@ -101,14 +101,14 @@ export default function EventosPage() {
   const gananciaTotal = eventos.reduce((sum, e) => sum + (e.actual_value || e.estimated_value || 0), 0)
 
   return (
-    <div className="p-6 lg:p-12 space-y-8">
+    <div className="space-y-6 lg:space-y-8">
       {/* Header */}
       <div>
         <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-2">
           CALENDARIO
         </p>
-        <h2 className="font-serif text-5xl md:text-6xl font-light tracking-tight text-black dark:text-white">Eventos Confirmados</h2>
-        <p className="text-neutral-600 dark:text-neutral-400 mt-2 text-base">Gestiona los eventos de leads ganados e intégralos con Google Calendar</p>
+        <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-light tracking-tight text-black dark:text-white">Eventos Confirmados</h2>
+        <p className="text-neutral-600 dark:text-neutral-400 mt-2 text-sm md:text-base">Gestiona los eventos de leads ganados e intégralos con Google Calendar</p>
       </div>
 
       {/* Stats Cards */}
@@ -169,14 +169,14 @@ export default function EventosPage() {
               return (
                 <Card key={evento.id} className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1 space-y-3">
-                        <div className="flex items-center gap-3">
-                          <h3 className="text-xl font-semibold text-black dark:text-white">
+                    <div className="flex flex-col lg:flex-row items-start justify-between gap-4">
+                      <div className="flex-1 space-y-3 w-full">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                          <h3 className="text-lg sm:text-xl font-semibold text-black dark:text-white">
                             {evento.nombre}
                           </h3>
                           {evento.event_type && (
-                            <span className="px-2 py-1 text-xs rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
+                            <span className="px-2 py-1 text-xs rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 w-fit">
                               {evento.event_type}
                             </span>
                           )}
