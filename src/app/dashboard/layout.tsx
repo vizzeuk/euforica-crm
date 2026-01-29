@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, Users, BarChart3, Settings, Bell, Zap, LogOut, Calendar, Menu, X } from 'lucide-react'
+import { Home, Users, BarChart3, Settings, Bell, Zap, LogOut, Calendar, Menu, X, Package, DollarSign } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { createBrowserClient } from '@supabase/ssr'
 import { useState } from 'react'
@@ -16,6 +16,8 @@ const navigation = [
   { name: 'Pipeline', href: '/dashboard/pipeline', icon: BarChart3 },
   { name: 'Eventos', href: '/dashboard/eventos', icon: Calendar },
   { name: 'Leads', href: '/dashboard/leads', icon: Users },
+  { name: 'Inventario', href: '/dashboard/inventario', icon: Package },
+  { name: 'Gastos', href: '/dashboard/gastos', icon: DollarSign },
   { name: 'Ajustes', href: '/dashboard/ajustes', icon: Settings },
 ]
 

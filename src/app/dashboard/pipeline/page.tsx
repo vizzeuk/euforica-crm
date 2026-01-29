@@ -255,7 +255,7 @@ export default function PipelinePage() {
       <Card className="bg-zinc-900/50 border-zinc-800">
         <CardContent className="py-4">
           <p className="text-sm text-zinc-400 text-center">
-            💡 <span className="font-semibold">Tip:</span> Arrastra las tarjetas entre columnas para cambiar el estado de los leads
+             <span className="font-semibold">Tip:</span> Arrastra las tarjetas entre columnas para cambiar el estado de los leads
           </p>
         </CardContent>
       </Card>

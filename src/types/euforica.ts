@@ -94,3 +94,119 @@ export interface UpdateLeadData extends Partial<CreateLeadData> {
   won_at?: string
   lost_reason?: string
 }
+
+// =====================================================
+// TIPOS DE INVENTARIO
+// =====================================================
+
+export type InventoryCategory = 'decoracion' | 'mobiliario' | 'iluminacion' | 'audio' | 'catering' | 'otros'
+export type InventoryStatus = 'disponible' | 'en-uso' | 'mantenimiento' | 'baja'
+
+export interface InventoryItem {
+  id: string
+  created_at: string
+  updated_at: string
+  
+  // Información del producto
+  nombre: string
+  descripcion?: string
+  categoria: InventoryCategory
+  codigo_interno?: string
+  
+  // Stock y disponibilidad
+  cantidad_total: number
+  cantidad_disponible: number
+  cantidad_minima?: number
+  status: InventoryStatus
+  
+  // Información financiera
+  costo_unitario?: number
+  precio_renta?: number
+  
+  // Ubicación y seguimiento
+  ubicacion?: string
+  proveedor?: string
+  
+  // Notas
+  notas?: string
+}
+
+export interface CreateInventoryData {
+  nombre: string
+  descripcion?: string
+  categoria: InventoryCategory
+  codigo_interno?: string
+  cantidad_total: number
+  cantidad_disponible?: number
+  cantidad_minima?: number
+  status?: InventoryStatus
+  costo_unitario?: number
+  precio_renta?: number
+  ubicacion?: string
+  proveedor?: string
+  notas?: string
+}
+
+export interface UpdateInventoryData extends Partial<CreateInventoryData> {}
+
+// =====================================================
+// TIPOS DE GASTOS
+// =====================================================
+
+export type ExpenseCategory = 'decoracion' | 'mobiliario' | 'iluminacion' | 'audio' | 'catering' | 'transporte' | 'personal' | 'marketing' | 'servicios' | 'otros'
+export type ExpenseStatus = 'pendiente' | 'pagado' | 'cancelado'
+
+export interface Expense {
+  id: string
+  created_at: string
+  updated_at: string
+  
+  // Información del gasto
+  concepto: string
+  descripcion?: string
+  categoria: ExpenseCategory
+  
+  // Monto
+  monto: number
+  
+  // Relación con lead/evento
+  lead_id?: string
+  lead_nombre?: string
+  
+  // Proveedor y pago
+  proveedor?: string
+  status: ExpenseStatus
+  fecha_pago?: string
+  
+  // Documentación
+  factura_numero?: string
+  metodo_pago?: string
+  
+  // Notas
+  notas?: string
+}
+
+export interface CreateExpenseData {
+  concepto: string
+  descripcion?: string
+  categoria: ExpenseCategory
+  monto: number
+  lead_id?: string
+  proveedor?: string
+  status?: ExpenseStatus
+  fecha_pago?: string
+  factura_numero?: string
+  metodo_pago?: string
+  notas?: string
+}
+
+export interface UpdateExpenseData extends Partial<CreateExpenseData> {}
+
+// Stats para gastos
+export interface ExpenseStats {
+  total_gastos: number
+  gastos_pendientes: number
+  gastos_pagados: number
+  gastos_mes_actual: number
+  por_categoria: Record<ExpenseCategory, number>
+}
